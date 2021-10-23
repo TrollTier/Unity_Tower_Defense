@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private Transform SpawnPoint;
-    [SerializeField] private Transform GoalPoint;
+    [SerializeField] private Transform FirstWaypoint;
     [SerializeField] private GameObject EnemyPrefab;
     [SerializeField] private int SpawnsPerWave = 10;
     [SerializeField] private float secondsBetweenSpawns = 1000;
@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour
         }
 
         navAgent.transform.position = SpawnPoint.transform.position;
-        navAgent.SetDestination(GoalPoint.position);
+        navAgent.SetDestination(FirstWaypoint.position);
 
         spawnedThisWave += 1;
         secondsSinceLastSpawn = 0;
