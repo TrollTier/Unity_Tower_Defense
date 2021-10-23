@@ -1,5 +1,7 @@
 ﻿using Assets.Scripts.Data;
+using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Assets.Scripts.Gameflow
 {
@@ -34,6 +36,17 @@ namespace Assets.Scripts.Gameflow
         private void SendEnemyDeathEvent(Health health)
         {
             Events.SendEnemyDied(this);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider.TryGetComponent<Goal>(out _))
+            {
+                Events.SendEnemyReachedGoal(this);
+                Events.SendGameObjectDied(gameObject);
+
+                Destroy(gameObject);
+            }
         }
     }
 }

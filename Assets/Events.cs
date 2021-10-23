@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Gameflow;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Assets
@@ -12,6 +13,7 @@ namespace Assets
         public static event GameObjectHandler GameObjectDied;
 
         public static event EnemyEventHandler EnemyDied;
+        public static event EnemyEventHandler EnemyReachedGoal;
 
         public static void SendEnemySpawned(GameObject spawnedEnemy)
         {
@@ -26,6 +28,11 @@ namespace Assets
         public static void SendEnemyDied(Enemy enemy)
         {
             EnemyDied?.Invoke(enemy);
+        }
+
+        public static void SendEnemyReachedGoal(Enemy enemy)
+        {
+            EnemyReachedGoal?.Invoke(enemy);
         }
     }
 }
