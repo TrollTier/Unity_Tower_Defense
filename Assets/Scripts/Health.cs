@@ -1,19 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField]
-        private float baseValue = 50f;
+        public delegate void HealthHandler(Health health);
+
+        public event HealthHandler OnDeath;
 
         private float currentValue;
+        public float CurrentHealth => currentValue;
 
+        public void Initialize(float startHealth)
+        {
+            currentValue = startHealth;
+        }
 
         public void AddDamage(float damage)
         {
@@ -22,20 +24,20 @@ namespace Assets.Scripts
         
         public void Heal(float amount)
         {
-            currentValue = Math.Min(baseValue, currentValue + amount);
-        }
-        
-
-        private void Start()
-        {
-            this.currentValue = baseValue;
+            currentValue += amount;
         }
 
         private void Update()
         {
             if (currentValue <= 0)
             {
-                EventAggregator.SendGameObjectDied(gameObject);
+                // Give other scripts the change to hook into the death process
+                OnDeath?.Invoke(this);
+            }
+
+            if (currentValue <= 0)
+            {
+                Events.SendGameObjectDied(gameObject);
 
                 Destroy(this.gameObject);
             }

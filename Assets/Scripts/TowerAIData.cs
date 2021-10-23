@@ -9,8 +9,8 @@ namespace Assets.Scripts
 
         static TowerAIData()
         {
-            EventAggregator.EnemySpawned += enemy => enemies.Add(enemy);
-            EventAggregator.GameObjectDied += obj => enemies.Remove(obj);
+            Events.EnemySpawned += enemy => enemies.Add(enemy);
+            Events.GameObjectDied += obj => enemies.Remove(obj);
         }
 
         public static GameObject GetClosestEnemy(Vector3 towerLocation)
