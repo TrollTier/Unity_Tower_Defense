@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa79dc837986f6459f35b2ecbd9b932, type: 3}
+  m_Name: IceTower
+  m_EditorClassIdentifier: 
+  baseCosts: 200
+  prefab: {fileID: 2795399459805553001, guid: 0a0c115993effbb46a06dc8fcae8b2d9, type: 3}
+  avatar: {fileID: 2800000, guid: 841991d81acd10c4f9cdb626e5ebbc98, type: 3}

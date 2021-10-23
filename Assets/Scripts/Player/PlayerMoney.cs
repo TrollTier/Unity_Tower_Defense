@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Gameflow;
+﻿using Assets.Scripts.Data;
+using Assets.Scripts.Gameflow;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
@@ -17,17 +18,25 @@ namespace Assets.Scripts.Player
         private void Start()
         {
             Events.EnemyDied += HandleEnemyDied;
+            Events.TowerBuilt += HandleTowerBuilt;
         }
 
         private void OnDestroy()
         {
             Events.EnemyDied -= HandleEnemyDied;
+            Events.TowerBuilt -= HandleTowerBuilt;
         }
 
         private void HandleEnemyDied(Enemy enemy)
         {
             currentMoney += enemy.Data.MoneyOnDeath;
 
+            OnAmountChanged?.Invoke(this);
+        }
+
+        private void HandleTowerBuilt(TowerBuildData data)
+        {
+            currentMoney -= data.BaseCosts;
             OnAmountChanged?.Invoke(this);
         }
     }
